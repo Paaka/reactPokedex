@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
-import Axios from 'axios';
-import AllPokemonsCardTemplate from '../components/templates/MainTemplate/AllPokemonsCardTemplate';
 import { useLocation } from 'react-router-dom';
+import Axios from 'axios';
+
+//Componetns:
+import AllPokemonsCardTemplate from '../components/templates/MainTemplate/AllPokemonsCardTemplate';
+import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
 
 const AllPokemonView = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -19,23 +21,35 @@ const AllPokemonView = () => {
     }
   };
 
+  const fetch20Pokemon = async startingPoint => {
+    const { data } = await Axios.get(
+      `https://pokeapi.co/api/v2/pokemon?offset=${startingPoint}&limit=20`,
+    );
+
+    return data.results;
+  };
+
+  const addAdditionalInformationToPokemons = (arrayOfPokemons, currentRange) => {
+    arrayOfPokemons.forEach((element, index) => {
+      const pokemonIndex = index + currentRange + 1;
+      element.index = pokemonIndex;
+      element.image = `https://pokeres.bastionbot.org/images/pokemon/${pokemonIndex}.png`;
+    });
+
+    return arrayOfPokemons;
+  };
+
   useEffect(() => {
-    async function fetch20Pokemon() {
-      const currentOffset = CalculateStartingPoint();
-      console.log(currentOffset);
-      const { data } = await Axios.get(
-        `https://pokeapi.co/api/v2/pokemon?offset=${currentOffset}&limit=20`,
-      );
-      const APIData = data.results;
-      APIData.forEach((element, index) => {
-        const pokemonIndex = index + currentOffset + 1;
-        element.image = `https://pokeres.bastionbot.org/images/pokemon/${pokemonIndex}.png`;
-      });
-      setPokemons(APIData);
+    async function fetchData() {
+      const startingPoint = CalculateStartingPoint();
+      const APIData = await fetch20Pokemon();
+      const updatedPokemons = addAdditionalInformationToPokemons(APIData, startingPoint);
+
+      setPokemons(updatedPokemons);
       setIsLoaded(true);
     }
 
-    fetch20Pokemon();
+    fetchData();
   }, []);
 
   return (

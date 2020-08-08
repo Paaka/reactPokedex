@@ -13,7 +13,7 @@ const AllPokemonsCardTemplate = ({ pokemons }) => {
   return (
     <CardWrapper>
       {pokemons.map((pokemon, index) => (
-        <Card key={index} id={index + 1} pokemon={pokemon} />
+        <Card key={index} id={pokemon.index} pokemon={pokemon} />
       ))}
     </CardWrapper>
   );
