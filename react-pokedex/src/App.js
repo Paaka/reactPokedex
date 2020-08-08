@@ -1,16 +1,12 @@
 import React from 'react';
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-import MainTemplate from './components/templates/MainTemplate/MainTamlate';
 import Axios from 'axios';
 import Card from './components/molecules/Card/Card';
-import styled from 'styled-components';
 
-const CardWrapper = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 20px;
-`;
+import routes from './routes/routes';
+import MainView from './views/MainView';
+import AllPokemonView from './views/AllPokemonView';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,19 +27,19 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  generateList() {
-    return (
-      <CardWrapper>
-        {this.state.data.map(pokemon => {
-          return <Card pokemon={pokemon} />;
-        })}
-      </CardWrapper>
-    );
-  }
-
   render() {
-    const { loading, data } = this.state;
-    return <MainTemplate>{loading ? <h1>loading</h1> : this.generateList()}</MainTemplate>;
+    return (
+      <Router>
+        <Switch>
+          <Route exact path={routes.main}>
+            <MainView></MainView>
+          </Route>
+          <Route path={routes.all}>
+            <AllPokemonView></AllPokemonView>
+          </Route>
+        </Switch>
+      </Router>
+    );
   }
 }
 

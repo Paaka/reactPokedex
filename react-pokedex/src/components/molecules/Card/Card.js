@@ -16,10 +16,10 @@ const StyledImage = styled.img`
   height: 200px;
 `;
 
-const Card = ({ pokemon }) => (
+const Card = ({ pokemon, id }) => (
   <Wrapper>
     <StyledImage src={pokemon.image} />
-    <p>#003</p>
+    <p>#{id}</p>
     <h3>{pokemon.name}</h3>
   </Wrapper>
 );
