@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../../molecules/Card/Card';
 import styled from 'styled-components';
+import NavigationBetweenPokemons from '../../molecules/NavigationBetweenPokemons/NavigationBetweenComponents';
 
 const CardWrapper = styled.div`
   display: grid;
@@ -11,11 +12,14 @@ const CardWrapper = styled.div`
 
 const AllPokemonsCardTemplate = ({ pokemons }) => {
   return (
-    <CardWrapper>
-      {pokemons.map((pokemon, index) => (
-        <Card key={index} id={pokemon.index} pokemon={pokemon} />
-      ))}
-    </CardWrapper>
+    <div>
+      <CardWrapper>
+        {pokemons.map((pokemon, index) => (
+          <Card key={index} id={pokemon.index} pokemon={pokemon} />
+        ))}
+      </CardWrapper>
+      <NavigationBetweenPokemons />
+    </div>
   );
 };
 

@@ -6,6 +6,12 @@ import Axios from 'axios';
 import AllPokemonsCardTemplate from '../components/templates/MainTemplate/AllPokemonsCardTemplate';
 import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
 
+/**
+ To Do:
+  -Catching errors
+  -Constant string
+ */
+
 const AllPokemonView = () => {
   const [pokemons, setPokemons] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,7 +48,7 @@ const AllPokemonView = () => {
   useEffect(() => {
     async function fetchData() {
       const startingPoint = CalculateStartingPoint();
-      const APIData = await fetch20Pokemon();
+      const APIData = await fetch20Pokemon(startingPoint);
       const updatedPokemons = addAdditionalInformationToPokemons(APIData, startingPoint);
 
       setPokemons(updatedPokemons);
@@ -50,7 +56,7 @@ const AllPokemonView = () => {
     }
 
     fetchData();
-  }, []);
+  }, [fetch20Pokemon]);
 
   return (
     <MainTemplate>
