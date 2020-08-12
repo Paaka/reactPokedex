@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../../molecules/Card/Card';
 import styled from 'styled-components';
-import NavigationBetweenPokemons from '../../molecules/NavigationBetweenPokemons/NavigationBetweenComponents';
+import NavigationBetweenPokemons from '../../molecules/NavigationBetweenPokemons/NavigationBetweenPokemons';
 
 const CardWrapper = styled.div`
   display: grid;
@@ -10,7 +10,7 @@ const CardWrapper = styled.div`
   grid-row-gap: 20px;
 `;
 
-const AllPokemonsCardTemplate = ({ pokemons }) => {
+const AllPokemonsCardTemplate = ({ pokemons, page, pageFn }) => {
   return (
     <div>
       <CardWrapper>
@@ -18,7 +18,7 @@ const AllPokemonsCardTemplate = ({ pokemons }) => {
           <Card key={index} id={pokemon.index} pokemon={pokemon} />
         ))}
       </CardWrapper>
-      <NavigationBetweenPokemons />
+      <NavigationBetweenPokemons page={page} pageFn={pageFn} />
     </div>
   );
 };

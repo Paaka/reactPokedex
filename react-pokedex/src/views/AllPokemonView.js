@@ -13,9 +13,15 @@ import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
  */
 
 const AllPokemonView = () => {
+  const [page, setPage] = useState(0);
   const [pokemons, setPokemons] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const location = useLocation();
+
+  const changePageHandler = currentPage => {
+    console.log(currentPage);
+    setPage(currentPage);
+  };
 
   const CalculateStartingPoint = () => {
     const currentLocation = location.pathname.split('/');
@@ -56,11 +62,15 @@ const AllPokemonView = () => {
     }
 
     fetchData();
-  }, [fetch20Pokemon]);
+  }, [page]);
 
   return (
     <MainTemplate>
-      {isLoaded ? <AllPokemonsCardTemplate pokemons={pokemons} /> : <h1>Loading...</h1>}
+      {isLoaded ? (
+        <AllPokemonsCardTemplate pokemons={pokemons} page={page} pageFn={changePageHandler} />
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </MainTemplate>
   );
 };
