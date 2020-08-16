@@ -19,7 +19,6 @@ const AllPokemonView = () => {
   const location = useLocation();
 
   const changePageHandler = currentPage => {
-    console.log(currentPage);
     setPage(currentPage);
   };
 
@@ -38,6 +37,7 @@ const AllPokemonView = () => {
       `https://pokeapi.co/api/v2/pokemon?offset=${startingPoint}&limit=20`,
     );
 
+    console.log(data.results);
     return data.results;
   };
 
@@ -53,6 +53,7 @@ const AllPokemonView = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoaded(false);
       const startingPoint = CalculateStartingPoint();
       const APIData = await fetch20Pokemon(startingPoint);
       const updatedPokemons = addAdditionalInformationToPokemons(APIData, startingPoint);

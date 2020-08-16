@@ -11,6 +11,9 @@ function MainStore(state = initialState, action) {
   }
 }
 
-let store = createStore(MainStore);
+let store = createStore(
+  MainStore,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 export default store;
