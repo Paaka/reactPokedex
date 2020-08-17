@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import TypeItem from '../../atoms/TypeItem/TypeItem';
+import PokemonTypes from './TypeWrapper';
 
 const Wrapper = styled.div`
   width: 200px;
@@ -30,6 +32,7 @@ const Card = ({ pokemon, id }) => {
     <Wrapper isLoaded={loaded}>
       <StyledImage src={pokemon.image} onLoad={onLoadFn} />
       <p>#{id}</p>
+      <PokemonTypes types={pokemon.types} />
       <h3>{pokemon.name}</h3>
     </Wrapper>
   );

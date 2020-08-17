@@ -29,8 +29,7 @@ const NavigationBetweenPokemons = ({ page, pageFn }) => {
   const pageLinks = createLinks(page);
 
   const onClickHandler = num => {
-    const validPageNumber = doRouteValidation(num);
-    pageFn(validPageNumber);
+    pageFn(num);
   };
 
   const doRouteValidation = num => {
@@ -44,7 +43,7 @@ const NavigationBetweenPokemons = ({ page, pageFn }) => {
   return (
     <Wrapper>
       <NavigationButton
-        onClickFn={() => onClickHandler(links[0])}
+        onClickFn={() => onClickHandler(doRouteValidation(links[0]))}
         linkPath={routes.allPokemons + doRouteValidation(links[0])}
       >
         Previous
@@ -58,7 +57,7 @@ const NavigationBetweenPokemons = ({ page, pageFn }) => {
         </NavigationButton>
       ))}
       <NavigationButton
-        onClickFn={() => onClickHandler(links[1])}
+        onClickFn={() => onClickHandler(doRouteValidation(links[1]))}
         linkPath={routes.allPokemons + doRouteValidation(links[1])}
       >
         Next

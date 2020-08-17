@@ -33,12 +33,20 @@ const AllPokemonView = () => {
   };
 
   const fetch20Pokemon = async startingPoint => {
-    const { data } = await Axios.get(
+    const data = await Axios.get(
       `https://pokeapi.co/api/v2/pokemon?offset=${startingPoint}&limit=20`,
-    );
+    ).then(res => {
+      const arrayOfPokemons = res.data.results;
 
-    console.log(data.results);
-    return data.results;
+      arrayOfPokemons.forEach(async pokemon => {
+        const additionalInformation = await Axios.get(pokemon.url);
+        pokemon.types = additionalInformation.data.types;
+      });
+
+      return arrayOfPokemons;
+    });
+
+    return data;
   };
 
   const addAdditionalInformationToPokemons = (arrayOfPokemons, currentRange) => {
