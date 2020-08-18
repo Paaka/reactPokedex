@@ -16,4 +16,5 @@ export default {
   bug: 'rgb(168,184,33)',
   dragon: 'rgb(112,56,249)',
   fairy: 'rgb(255,163,177)',
+  steel: 'rgb(184,184,208)',
 };

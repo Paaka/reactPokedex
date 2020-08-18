@@ -1,24 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
-import TypeItem from '../../atoms/TypeItem/TypeItem';
-import PokemonTypes from './TypeWrapper';
 
 const Wrapper = styled.div`
   width: 200px;
-  height: 300px;
-  border: 1px solid black;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-self: center;
   margin-top: 10px;
   opacity: ${({ isLoaded }) => (isLoaded ? 1 : 0)};
-  transition: opacity 0.25s;
+  transition: all 0.25s;
+  align-items: flex-start;
+
+  :hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+  }
 `;
 
 const StyledImage = styled.img`
   width: 100%;
   height: 200px;
+  background-color: #eee;
+  border-radius: 10px;
+`;
+
+const StyledIndex = styled.p`
+  margin: 2px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #666;
+`;
+
+const StyledPokemonName = styled.h3`
+  margin: 5px 5px;
+  font-weight: 700;
+  text-transform: capitalize;
 `;
 
 const Card = ({ pokemon, id }) => {
@@ -28,12 +46,23 @@ const Card = ({ pokemon, id }) => {
     setIsLoaded(true);
   };
 
+  const createPokedexId = () => {
+    console.log(id);
+    if (id < 10) {
+      return `#00${id}`;
+    } else if (id < 100) {
+      return `#0${id}`;
+    } else {
+      return `#${id}`;
+    }
+  };
+
   return (
     <Wrapper isLoaded={loaded}>
       <StyledImage src={pokemon.image} onLoad={onLoadFn} />
-      <p>#{id}</p>
-      <PokemonTypes types={pokemon.types} />
-      <h3>{pokemon.name}</h3>
+      <StyledIndex>{createPokedexId()}</StyledIndex>
+      {/* <PokemonTypes types={pokemon.types} id={id} /> */}
+      <StyledPokemonName>{pokemon.name}</StyledPokemonName>
     </Wrapper>
   );
 };

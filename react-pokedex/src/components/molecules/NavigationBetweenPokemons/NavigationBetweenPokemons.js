@@ -50,6 +50,7 @@ const NavigationBetweenPokemons = ({ page, pageFn }) => {
       </NavigationButton>
       {pageLinks.map(page => (
         <NavigationButton
+          key={page}
           onClickFn={() => onClickHandler(page)}
           linkPath={routes.allPokemons + doRouteValidation(page)}
         >

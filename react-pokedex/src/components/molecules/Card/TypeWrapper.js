@@ -5,14 +5,15 @@ import TypeItem from '../../atoms/TypeItem/TypeItem';
 const TypeWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  min-height: 32px;
 `;
 
-const PokemonTypes = ({ types = [] }) => {
+const PokemonTypes = ({ types = [], id }) => {
   return (
     <TypeWrapper>
-      {types.map(pokemonType => {
-        console.log(pokemonType);
-        return <TypeItem>{pokemonType.type.name}</TypeItem>;
+      {types.map((pokemonType, index) => {
+        const itemKey = id + pokemonType.type.name;
+        return <TypeItem key={itemKey}>{pokemonType.type.name}</TypeItem>;
       })}
     </TypeWrapper>
   );
