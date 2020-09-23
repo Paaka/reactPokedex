@@ -10,6 +10,14 @@ const SpecificPokemonView = () => {
   const [isLoaded, SetIsLoaded] = useState(false);
   const pokemonID = location.pathname.substring(17, 20) * 1;
 
+  const getInformationAboutAbility = async data => {
+    const { abilities } = data;
+
+    const ability = await Axios.get(abilities[0].ability.url).then(res => res.data);
+
+    return ability.effect_entries[0];
+  };
+
   const checkPokemonGender = (res, pokemonName) => {
     const arrayOfPokemons = res.data.pokemon_species_details;
     if (Array.isArray(arrayOfPokemons)) {
@@ -48,6 +56,8 @@ const SpecificPokemonView = () => {
       `https://pokeapi.co/api/v2/pokemon-species/${pokemonID}/`,
     ).then(res => res.data.flavor_text_entries[0].flavor_text);
     data.genders = await setPokemonGender(data.name);
+    data.abilityInformation = await getInformationAboutAbility(data);
+
     return data;
   };
 
