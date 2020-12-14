@@ -23,7 +23,7 @@ const SpecficPokemonTemplate = ({ PokemonData, pokemonID }) => {
       <H2 size={32}>{PokemonData.name}</H2>
       <ImageAndDetailsContainer>
         <StyledImage src={`https://pokeres.bastionbot.org/images/pokemon/${pokemonID}.png`} />
-
+        
         <PokemonAditionalInfo data={PokemonData}></PokemonAditionalInfo>
       </ImageAndDetailsContainer>
     </div>

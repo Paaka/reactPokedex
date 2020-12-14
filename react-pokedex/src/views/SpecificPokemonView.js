@@ -3,6 +3,7 @@ import Axios from 'axios';
 import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
 import { useLocation } from 'react-router-dom';
 import SpecficPokemonTemplate from '../components/templates/SpecificPokemon/SpecificPokemonTemplate';
+import LoadingTemplate from '../components/templates/LoadingTemplate/LoadingTemplate';
 
 const SpecificPokemonView = () => {
   const location = useLocation();
@@ -77,7 +78,7 @@ const SpecificPokemonView = () => {
       {isLoaded ? (
         <SpecficPokemonTemplate pokemonID={pokemonID} PokemonData={PokemonData} />
       ) : (
-        <h1>Loading</h1>
+        <LoadingTemplate />
       )}
     </MainTemplate>
   );
