@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../../routes/routes';
+import { FormatPokedexId } from '../../../utilities/utilities';
 
 const Wrapper = styled.div`
   width: 200px;
@@ -49,21 +50,13 @@ const Card = ({ pokemon, id }) => {
     setIsLoaded(true);
   };
 
-  const createPokedexId = () => {
-    if (id < 10) {
-      return `#00${id}`;
-    } else if (id < 100) {
-      return `#0${id}`;
-    } else {
-      return `#${id}`;
-    }
-  };
+  
 
   return (
     <Link to={routes.specificPokemonLink + id} style={{ textDecoration: 'none' }}>
       <Wrapper isLoaded={loaded}>
         <StyledImage src={pokemon.image} onLoad={onLoadFn} />
-        <StyledIndex>{createPokedexId()}</StyledIndex>
+        <StyledIndex>{FormatPokedexId(id)}</StyledIndex>
         {/* <PokemonTypes types={pokemon.types} id={id} /> */}
         <StyledPokemonName>{pokemon.name}</StyledPokemonName>
       </Wrapper>

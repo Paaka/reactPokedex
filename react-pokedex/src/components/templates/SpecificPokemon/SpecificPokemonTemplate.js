@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import H2 from '../../atoms/Typography/H2/H2';
 import PokemonAditionalInfo from '../../molecules/PokemonAditionalInfo/PokemonAditionalInfo';
+import NavigationBetweenPokemons from '../../organisms/NavigationBetweenPokemons/NavigationBetweenPokemons';
 
 const StyledImage = styled.img`
   height: 25rem;
@@ -20,7 +21,7 @@ const ImageAndDetailsContainer = styled.div`
 const SpecficPokemonTemplate = ({ PokemonData, pokemonID }) => {
   return (
     <div>
-      <H2 size={32}>{PokemonData.name}</H2>
+      <NavigationBetweenPokemons pokemonName={PokemonData.name} pokemonID={pokemonID}>{console.log(PokemonData)}</NavigationBetweenPokemons>
       <ImageAndDetailsContainer>
         <StyledImage src={`https://pokeres.bastionbot.org/images/pokemon/${pokemonID}.png`} />
         
