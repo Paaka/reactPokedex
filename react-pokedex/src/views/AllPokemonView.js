@@ -5,6 +5,7 @@ import Axios from 'axios';
 //Componetns:
 import AllPokemonsCardTemplate from '../components/templates/MainTemplate/AllPokemonsCardTemplate';
 import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
+import LoadingTemplate from '../components/templates/LoadingTemplate/LoadingTemplate';
 
 /**
  To Do:
@@ -78,7 +79,7 @@ const AllPokemonView = () => {
       {isLoaded ? (
         <AllPokemonsCardTemplate pokemons={pokemons} page={page} pageFn={changePageHandler} />
       ) : (
-        <h1>Loading...</h1>
+        <LoadingTemplate />
       )}
     </MainTemplate>
   );
