@@ -1,4 +1,7 @@
+import Axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import typeColors from '../../../constants/typeColors';
 import { FormatPokedexId } from '../../../utilities/utilities';
@@ -21,7 +24,6 @@ const CentralPokemonName = styled.h2`
 
 const LeftItem = styled.div`
     height:100%;
-    width:50%;
     background-color:#bbb;
     clip-path: polygon(0% 0%, 100% 0%, 100% 70%,  50% 70%, 30% 100%,  0% 100%);
     margin-right:5px;
@@ -34,7 +36,6 @@ const LeftItem = styled.div`
 `
 const RightItem = styled.div`
     height:100%;
-    width:50%;
     background-color:#bbb;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 70% 100%, 50% 70%, 0% 70%);
     margin-left:5px;
@@ -45,20 +46,40 @@ const RightItem = styled.div`
     }
 `
 
+const StyledLink = styled(Link)`
+    width:50vw;
+    text-decoration:none;
+`
 
-const NavigationBetweenPokemons = ({pokemonName, pokemonID}) => (
-    <Containter>
-        
-        <LeftItem>
-            XD
-        </LeftItem>
-        <CentralPokemonName>
-            {FormatPokedexId(pokemonID) + ' '+  pokemonName}
-        </CentralPokemonName>
-        <RightItem>
-            XD
-        </RightItem>
-    </Containter>
-);
+
+const NavigationBetweenPokemons = ({pokemonName, pokemonInfo, pokemonID, changeLoadingFn}) => {
+    const changePokemonHandler = () => {
+        changeLoadingFn(false);
+    }
+    
+    return (
+        <Containter>     
+            <StyledLink to={`/specificPokemon/${pokemonInfo.previousPokemon.pokedexID}`}
+                    onClick={changePokemonHandler} 
+                    style={{textDecoration:'none'}}
+            >
+                <LeftItem>
+                    <img src={pokemonInfo.previousPokemon.spriteURL} />
+                    {pokemonInfo.previousPokemon.name}
+                </LeftItem>     
+            </StyledLink>
+            <CentralPokemonName>
+                {FormatPokedexId(pokemonID) + ' '+  pokemonName}
+            </CentralPokemonName>
+            <StyledLink to={`/specificPokemon/${pokemonInfo.nextPokemon.pokedexID}`}
+                  onClick={changePokemonHandler} 
+                  style={{textDecoration:'none'}} >
+                <RightItem>
+                    {pokemonInfo.nextPokemon.name}
+                </RightItem>
+            </StyledLink>
+        </Containter>
+    );
+};
 
 export default NavigationBetweenPokemons;

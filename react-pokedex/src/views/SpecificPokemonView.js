@@ -51,6 +51,27 @@ const SpecificPokemonView = () => {
     return genders;
   };
 
+  const checkMinAndMaxPokemonId = id =>{
+    if(id <= 0){
+      return 251;
+    }else if(id > 251){
+      return 1;
+    }else{
+      return id;
+    }
+  }
+
+  const getInformationAboutNeighbourPokemon = async id => {
+      let pokeID = checkMinAndMaxPokemonId(id);
+      const {data} = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeID}`);
+    
+      return {
+        name:data.name,
+        pokedexID:pokeID,
+        spriteURL:data.sprites.front_default,
+      }
+  }
+
   const FetchPokemon = async () => {
     const { data } = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`);
     data.description = await Axios.get(
@@ -58,6 +79,8 @@ const SpecificPokemonView = () => {
     ).then(res => res.data.flavor_text_entries[0].flavor_text);
     data.genders = await setPokemonGender(data.name);
     data.abilityInformation = await getInformationAboutAbility(data);
+    data.nextPokemon = await getInformationAboutNeighbourPokemon(pokemonID+1);
+    data.previousPokemon = await getInformationAboutNeighbourPokemon(pokemonID-1);
 
     return data;
   };
@@ -65,18 +88,20 @@ const SpecificPokemonView = () => {
   useEffect(() => {
     async function FetchData() {
       const data = await FetchPokemon();
-
       setPokemonData(data);
       SetIsLoaded(true);
     }
 
     FetchData();
-  }, []);
+  }, [isLoaded]);
 
   return (
     <MainTemplate>
       {isLoaded ? (
-        <SpecficPokemonTemplate pokemonID={pokemonID} PokemonData={PokemonData} />
+        <SpecficPokemonTemplate 
+            pokemonID={pokemonID} 
+            PokemonData={PokemonData} 
+            changeLoadingFn={SetIsLoaded} />
       ) : (
         <LoadingTemplate />
       )}

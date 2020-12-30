@@ -18,10 +18,10 @@ const ImageAndDetailsContainer = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const SpecficPokemonTemplate = ({ PokemonData, pokemonID }) => {
+const SpecficPokemonTemplate = ({ PokemonData, pokemonID, changeLoadingFn }) => {
   return (
     <div>
-      <NavigationBetweenPokemons pokemonName={PokemonData.name} pokemonID={pokemonID}>{console.log(PokemonData)}</NavigationBetweenPokemons>
+      <NavigationBetweenPokemons pokemonName={PokemonData.name} pokemonID={pokemonID} pokemonInfo={PokemonData} changeLoadingFn={changeLoadingFn}></NavigationBetweenPokemons>
       <ImageAndDetailsContainer>
         <StyledImage src={`https://pokeres.bastionbot.org/images/pokemon/${pokemonID}.png`} />
         
