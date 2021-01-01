@@ -18,9 +18,13 @@ const AdtionalInfoCard = () => {
 };
 
 const PokemonAditionalInfo = ({ data }) => {
+  const formatPokemonDescription = () => {
+    return data.description.replace(''," ");
+  }
+
   return (
     <AditionalInfoWrapper>
-      <p>{data.description}</p>
+      <p>{formatPokemonDescription()}</p>
       <PokemonInformation pokeInfo={data} />
     </AditionalInfoWrapper>
   );
