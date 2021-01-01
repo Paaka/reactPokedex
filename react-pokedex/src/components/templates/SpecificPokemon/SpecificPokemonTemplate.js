@@ -24,7 +24,6 @@ const SpecficPokemonTemplate = ({ PokemonData, pokemonID, changeLoadingFn }) => 
       <NavigationBetweenPokemons pokemonName={PokemonData.name} pokemonID={pokemonID} pokemonInfo={PokemonData} changeLoadingFn={changeLoadingFn}></NavigationBetweenPokemons>
       <ImageAndDetailsContainer>
         <StyledImage src={`https://pokeres.bastionbot.org/images/pokemon/${pokemonID}.png`} />
-        
         <PokemonAditionalInfo data={PokemonData}></PokemonAditionalInfo>
       </ImageAndDetailsContainer>
     </div>

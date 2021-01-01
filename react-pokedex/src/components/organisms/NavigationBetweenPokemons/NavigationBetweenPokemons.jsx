@@ -19,7 +19,7 @@ const CentralPokemonHeading = styled.h2`
     margin:0 auto;
     transform:translateX(-50%);
     font-family: 'Alata', sans-serif;
-    font-weight: 700;
+    font-weight: 300;
     font-size:2rem;
     text-transform:capitalize;
 `

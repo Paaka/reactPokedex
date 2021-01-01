@@ -13,7 +13,7 @@ const Container = styled.div`
     background-color:#eee;
 `
 
-const StyledImage = styled.image`
+const StyledImage = styled.img`
     min-height:60px;
     min-width:60px;
     background-image: url(${pokeballImage});
