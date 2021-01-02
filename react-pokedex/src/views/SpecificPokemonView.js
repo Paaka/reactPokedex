@@ -15,8 +15,11 @@ const SpecificPokemonView = () => {
     const { abilities } = data;
 
     const ability = await Axios.get(abilities[0].ability.url).then(res => res.data);
-    //ability.effect_entries.map(entry => console.log(entry));
-    return ability.effect_entries[1];
+    const engAblities = ability.effect_entries.filter(entry => entry.language.name === 'en');
+    if(engAblities.length < 1){
+      return [{short_effect:"sorry no description is avalibe"}]
+    }
+    return engAblities[0];
   };
 
   const checkPokemonGender = (res, pokemonName) => {
@@ -72,6 +75,20 @@ const SpecificPokemonView = () => {
       }
   }
 
+  const getInfoAboutWeaknesses = async types => {
+    const info = await Axios.get(types[0].type.url);
+    const weakness = info.data.damage_relations.double_damage_from;
+
+    if(types.length ===2){
+      const infoAboutSecondWeaknes = await Axios.get(types[1].type.url);
+      const secondWeakness = infoAboutSecondWeaknes.data.damage_relations.double_damage_from;
+      return [...secondWeakness, ...weakness];
+    }
+
+    return weakness;
+
+  }
+
   const FetchPokemon = async () => {
     const { data } = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`);
     data.description = await Axios.get(
@@ -81,7 +98,9 @@ const SpecificPokemonView = () => {
     data.abilityInformation = await getInformationAboutAbility(data);
     data.nextPokemon = await getInformationAboutNeighbourPokemon(pokemonID+1);
     data.previousPokemon = await getInformationAboutNeighbourPokemon(pokemonID-1);
-
+    data.weakness = await getInfoAboutWeaknesses(data.types);
+    
+    console.log(data);
     return data;
   };
 

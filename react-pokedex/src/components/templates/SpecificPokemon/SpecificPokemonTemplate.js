@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import H2 from '../../atoms/Typography/H2/H2';
 import PokemonAditionalInfo from '../../molecules/PokemonAditionalInfo/PokemonAditionalInfo';
+import TypeItem from '../../molecules/TypeItem/TypeItem';
 import NavigationBetweenPokemons from '../../organisms/NavigationBetweenPokemons/NavigationBetweenPokemons';
 
 const StyledImage = styled.img`
@@ -19,6 +20,9 @@ const ImageAndDetailsContainer = styled.div`
 `;
 
 const SpecficPokemonTemplate = ({ PokemonData, pokemonID, changeLoadingFn }) => {
+
+  console.log(PokemonData.weakness);
+
   return (
     <div>
       <NavigationBetweenPokemons pokemonName={PokemonData.name} pokemonID={pokemonID} pokemonInfo={PokemonData} changeLoadingFn={changeLoadingFn}></NavigationBetweenPokemons>

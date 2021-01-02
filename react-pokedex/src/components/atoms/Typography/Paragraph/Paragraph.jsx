@@ -16,6 +16,6 @@ const Paragraph = (
     fontWeight}) => <StyledP
                      fSize={fontSize}
                      fColor={fontColor}
-                     fontWeight={fontWeight}>{children}</StyledP>
+                     fWeight={fontWeight}>{children}</StyledP>
                      
 export default Paragraph;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Paragraph from '../../atoms/Typography/Paragraph/Paragraph';
 import PokemonInformation from '../PokemonInformation/PokemonInformation';
+import TypeItem from '../TypeItem/TypeItem';
 
 const AditionalInfoWrapper = styled.div`
   display: flex;
@@ -9,23 +11,39 @@ const AditionalInfoWrapper = styled.div`
   justify-self: center;
 `;
 
-const AdtionalInfoCard = () => {
-  return (
-    <div>
-      <p>Dodatkowe info</p>
-    </div>
-  );
-};
+const FlexWrapper = styled.div`
+  display:flex;
+  margin:10px 0;
+`
+
 
 const PokemonAditionalInfo = ({ data }) => {
+  const weakness = data.weakness;
+  
   const formatPokemonDescription = () => {
     return data.description.replace(''," ");
   }
 
+  const formatPokemonType = () => {
+    if(data.types.length > 1){
+      return "Types :"
+    }else{
+      return "Type :"
+    }
+  }
+
   return (
     <AditionalInfoWrapper>
-      <p>{formatPokemonDescription()}</p>
+      <p>Pokedex entry : {formatPokemonDescription()}</p>
       <PokemonInformation pokeInfo={data} />
+      <Paragraph>{formatPokemonType()}</Paragraph>
+      <FlexWrapper>
+        {data.types.map(item => <TypeItem key={item.type.name} type={item.type.name} />)}
+      </FlexWrapper>
+      <Paragraph>Weaknesses :</Paragraph>
+      <FlexWrapper>
+        {data.weakness.map(type => <TypeItem key={type.name} type={type.name} />)}
+      </FlexWrapper>
     </AditionalInfoWrapper>
   );
 };

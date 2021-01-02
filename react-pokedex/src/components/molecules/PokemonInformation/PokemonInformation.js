@@ -94,7 +94,6 @@ const PokemonInformation = ({ pokeInfo }) => {
   const avalibleGenders = pokeInfo.genders.filter(pokemon => pokemon.gender);
 
   const showBackOfCard = () => {
-    console.log('Odwracam Karte');
     setIsCardInReverse(!isCardInReverse);
   };
 
