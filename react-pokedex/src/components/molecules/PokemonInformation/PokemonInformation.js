@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import QuestionMark from '../../../assets/SVGS/question.svg';
 import FemaleGenderIcon from '../../../assets/SVGS/femenine.svg';
 import MaleGenderIcon from '../../../assets/SVGS/male-gender.svg';
+import Paragraph from '../../atoms/Typography/Paragraph/Paragraph';
+import Heading3 from '../../atoms/Typography/Heading3/Heading3';
 
 const Wrapper = styled.div`
-  background-color: rgb(48,167,215);
+  background-color: ${({isReverse})=> isReverse ? '#313131' :'rgb(48,167,215)'};
   padding: 10px;
   border-radius: 10px;
   max-width:600px;
+  height:180px;
+  transition:background-color 0.25s ease-in-out;
+  position:relative;
+  overflow:hidden;
 `;
 
 const FrontOfCardContainer = styled.div`
@@ -51,7 +57,6 @@ const BigHeading = styled.h3`
 
 const GenderContainer = styled.div`
   display:flex;
-
 `
 
 const StyledGenderIcon = styled.img`
@@ -61,14 +66,36 @@ const StyledGenderIcon = styled.img`
   margin-top:20px;
 `
 
+const CloseContainer = styled.div`
+  position:absolute;
+  width:15%;
+  height:30px;
+  right:0px;
+  top:0px;
+  background-color:#222;
+  color: white;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  cursor:pointer;
+  clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 17.5% 100%, 0% 50%);
+`
+
+const BackOfTheCardWrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  max-height:540px;
+  width:100%;
+`
+
 
 const PokemonInformation = ({ pokeInfo }) => {
-  let isCardInReverse = false;
+  let [isCardInReverse, setIsCardInReverse] = useState(false);
   const avalibleGenders = pokeInfo.genders.filter(pokemon => pokemon.gender);
 
   const showBackOfCard = () => {
     console.log('Odwracam Karte');
-    isCardInReverse = !isCardInReverse;
+    setIsCardInReverse(!isCardInReverse);
   };
 
   const GeneratePokemonGenderIcon = (gender) => {
@@ -82,9 +109,16 @@ const PokemonInformation = ({ pokeInfo }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper isReverse={isCardInReverse}>
       {isCardInReverse ? (
-        <div>Odwrót</div>
+        <div>
+          <CloseContainer onClick={showBackOfCard}>Close &#10006;</CloseContainer>
+          <BackOfTheCardWrapper>
+            <Paragraph fontSize={14} fontColor="#666">Ability Info</Paragraph>
+            <Heading3 margin="10px 0px 0px 0px" fontColor="#eee" fontSize={28} textTransform="capitalize">{pokeInfo.abilities[0].ability.name}</Heading3>
+            <Paragraph fontColor="#eee">{pokeInfo.abilityInformation.short_effect}</Paragraph>
+          </BackOfTheCardWrapper>
+        </div>
       ) : (
         <FrontOfCardContainer>
             <div>

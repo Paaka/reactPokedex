@@ -15,8 +15,8 @@ const SpecificPokemonView = () => {
     const { abilities } = data;
 
     const ability = await Axios.get(abilities[0].ability.url).then(res => res.data);
-
-    return ability.effect_entries[0];
+    //ability.effect_entries.map(entry => console.log(entry));
+    return ability.effect_entries[1];
   };
 
   const checkPokemonGender = (res, pokemonName) => {
