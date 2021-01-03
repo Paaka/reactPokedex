@@ -16,6 +16,13 @@ const FlexWrapper = styled.div`
   margin:10px 0;
 `
 
+const GridWrapper = styled.div`
+  display:grid;
+  width:600px;
+  grid-row-gap:10px;
+  grid-template-columns:repeat(4,1fr);
+`
+
 
 const PokemonAditionalInfo = ({ data }) => {
   const weakness = data.weakness;
@@ -41,9 +48,9 @@ const PokemonAditionalInfo = ({ data }) => {
         {data.types.map(item => <TypeItem key={item.type.name} type={item.type.name} />)}
       </FlexWrapper>
       <Paragraph>Weaknesses :</Paragraph>
-      <FlexWrapper>
+      <GridWrapper>
         {data.weakness.map(type => <TypeItem key={type.name} type={type.name} />)}
-      </FlexWrapper>
+      </GridWrapper>
     </AditionalInfoWrapper>
   );
 };

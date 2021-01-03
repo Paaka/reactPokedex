@@ -21,7 +21,6 @@ const ImageAndDetailsContainer = styled.div`
 
 const SpecficPokemonTemplate = ({ PokemonData, pokemonID, changeLoadingFn }) => {
 
-  console.log(PokemonData.weakness);
 
   return (
     <div>

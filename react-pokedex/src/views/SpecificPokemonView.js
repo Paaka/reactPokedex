@@ -79,14 +79,69 @@ const SpecificPokemonView = () => {
     const info = await Axios.get(types[0].type.url);
     const weakness = info.data.damage_relations.double_damage_from;
 
+    const findDulplicates = (arr) => {
+      const arrToReturn = [];
+
+      arr.filter(type => {
+         const pokemonTypeWithoutDuplicate = weakness.filter(orginalWeakness => type.name === orginalWeakness.name);
+         arrToReturn.push(...pokemonTypeWithoutDuplicate);
+      });
+      return arrToReturn;
+    }
+
+    const removeDuplicates = (arrToRemoveFrom, duplicates) => {
+        const arrWithoutDuplicates = arrToRemoveFrom.filter(type => duplicates.every(duplicate => {
+          return duplicate.name !==type.name;
+        }));
+        
+        return arrWithoutDuplicates;
+    }
+
     if(types.length ===2){
       const infoAboutSecondWeaknes = await Axios.get(types[1].type.url);
       const secondWeakness = infoAboutSecondWeaknes.data.damage_relations.double_damage_from;
-      return [...secondWeakness, ...weakness];
+      const duplicates = findDulplicates(secondWeakness);
+      const withoutDuplicates = removeDuplicates(secondWeakness,duplicates);
+      return [...weakness, ...withoutDuplicates];
     }
 
     return weakness;
 
+  }
+
+  
+
+  const getEvolutionChain = async pokemonData => {
+    const {data} = await Axios.get(pokemonData.species.url);
+    const x = await Axios.get(data.evolution_chain.url);
+    const evolutionChain = [];
+
+    const getPokemonEvolutionInformation = async (species) => {
+      const evolutionInformation = await Axios.get(species.url);
+      const pokemonImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolutionInformation.data.id}.png`
+
+      return {
+        name:species.name,
+        pokemonImage,
+        pokedexID: evolutionInformation.data.id,
+      }
+    }
+
+    const firstEvolution = await getPokemonEvolutionInformation(x.data.chain.species);
+
+    evolutionChain.push(firstEvolution);
+
+    if(x.data.chain.evolves_to.length > 0){
+      const secondEvolution = await getPokemonEvolutionInformation(x.data.chain.evolves_to[0].species);
+      evolutionChain.push(secondEvolution);
+
+      if(x.data.chain.evolves_to[0].evolves_to.length > 0){
+        const thirdEvolution = await getPokemonEvolutionInformation(x.data.chain.evolves_to[0].evolves_to[0].species);
+        evolutionChain.push(thirdEvolution);
+      }
+    }
+
+    return evolutionChain;
   }
 
   const FetchPokemon = async () => {
@@ -99,6 +154,7 @@ const SpecificPokemonView = () => {
     data.nextPokemon = await getInformationAboutNeighbourPokemon(pokemonID+1);
     data.previousPokemon = await getInformationAboutNeighbourPokemon(pokemonID-1);
     data.weakness = await getInfoAboutWeaknesses(data.types);
+    data.evolutionChain = await getEvolutionChain(data)
     
     console.log(data);
     return data;
