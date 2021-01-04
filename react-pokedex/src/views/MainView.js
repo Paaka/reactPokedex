@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MainMenuCard from '../components/molecules/MainMenuCard/MainMenuCard';
 
 import MainTemplate from '../components/templates/MainTemplate/MainTamlate';
+import Colors from '../constants/Colors';
 import routes from '../routes/routes';
+
+import PokeballImage from '../assets/SVGS/pokeballWhite.svg';
+import MoveImage from '../assets/SVGS/music-player.svg';
+import GamesImage from '../assets/SVGS/joystick.svg';
+import AboutImage from '../assets/SVGS/about.svg';
 
 
 const Wrapper = styled.div`
@@ -15,7 +22,14 @@ const Wrapper = styled.div`
 `
 
 const ItemWrapper = styled.div`
-  background-color:red;
+  display:grid;
+  width:25%;
+  height:60vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  justify-items:center;
+  grid-row-gap:20px;
+  
 `
 
 
@@ -25,7 +39,26 @@ const MainView = () => {
     <MainTemplate>
       <Wrapper>
         <ItemWrapper>
-          <Link to={routes.first20Pokemon}>All Pokemen</Link>
+          <MainMenuCard 
+            cardColor={Colors.orange} 
+            linkTo={routes.first20Pokemon}
+            image={PokeballImage}
+          >Pokedex</MainMenuCard>
+          <MainMenuCard 
+            cardColor={Colors.yellow} 
+            linkTo={routes.first20Pokemon}
+            image={MoveImage}
+          >Moves</MainMenuCard>
+          <MainMenuCard 
+            cardColor={Colors.green} 
+            linkTo={routes.first20Pokemon}
+            image={GamesImage}
+          >Games</MainMenuCard>
+          <MainMenuCard 
+            cardColor={Colors.blue} 
+            linkTo={routes.first20Pokemon}
+            image={AboutImage}
+          >About</MainMenuCard>
         </ItemWrapper>
       </Wrapper>
     </MainTemplate>
