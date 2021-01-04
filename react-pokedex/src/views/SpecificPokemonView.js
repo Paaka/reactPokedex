@@ -118,28 +118,48 @@ const SpecificPokemonView = () => {
 
     const getPokemonEvolutionInformation = async (species) => {
       const evolutionInformation = await Axios.get(species.url);
-      const pokemonImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolutionInformation.data.id}.png`
-
-      return {
-        name:species.name,
-        pokemonImage,
-        pokedexID: evolutionInformation.data.id,
+      if(evolutionInformation.data.id <252){
+        const pokemonImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${evolutionInformation.data.id}.png`
+        return{
+          name:species.name,
+          pokemonImage,
+          pokedexID: evolutionInformation.data.id,
+        };
       }
+      return;
+    };
+
+    const firstEvo = await getPokemonEvolutionInformation(x.data.chain.species);
+    if(firstEvo !== undefined){
+      evolutionChain.push(firstEvo);
     }
 
-    const firstEvolution = await getPokemonEvolutionInformation(x.data.chain.species);
-
-    evolutionChain.push(firstEvolution);
-
-    if(x.data.chain.evolves_to.length > 0){
-      const secondEvolution = await getPokemonEvolutionInformation(x.data.chain.evolves_to[0].species);
-      evolutionChain.push(secondEvolution);
-
+    if(x.data.chain.evolves_to.length > 0 && x.data.chain.evolves_to.length < 2){
+      const secondEvolutions = await  getPokemonEvolutionInformation(x.data.chain.evolves_to[0].species);
+      if(secondEvolutions !== undefined){
+        
+      evolutionChain.push(secondEvolutions);
+      }
+    
+      
       if(x.data.chain.evolves_to[0].evolves_to.length > 0){
-        const thirdEvolution = await getPokemonEvolutionInformation(x.data.chain.evolves_to[0].evolves_to[0].species);
-        evolutionChain.push(thirdEvolution);
+        const thirdEvo =  await getPokemonEvolutionInformation(x.data.chain.evolves_to[0].evolves_to[0].species);
+        if(thirdEvo !== undefined){
+          evolutionChain.push(thirdEvo);
+        }
       }
     }
+
+    if(x.data.chain.evolves_to.length > 1){
+      for(let i = 0;i < x.data.chain.evolves_to.length; i++){
+        const secondEvolutions = await  getPokemonEvolutionInformation(x.data.chain.evolves_to[i].species);
+        if(secondEvolutions !== undefined){
+          evolutionChain.push(secondEvolutions);
+        }
+      }
+    }
+
+    
 
     return evolutionChain;
   }

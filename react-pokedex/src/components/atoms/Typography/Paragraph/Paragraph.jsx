@@ -8,14 +8,17 @@ const StyledP = styled.p`
     font-size:${({fSize})=> fSize ? fSize+"px": '1rem'};
     color:${({fColor})=> fColor ? fColor : 'black'};
     font-weight:${({fWeight})=> fWeight ? fWeight : '400'};
+    text-transform:${({tTransform})=> tTransform ? tTransform :'none'};
 `
 const Paragraph = (
     {children,
     fontSize,
     fontColor,
-    fontWeight}) => <StyledP
+    fontWeight,
+    textTransform}) => <StyledP
                      fSize={fontSize}
                      fColor={fontColor}
-                     fWeight={fontWeight}>{children}</StyledP>
+                     fWeight={fontWeight}
+                     tTransform={textTransform}>{children}</StyledP>
                      
 export default Paragraph;
