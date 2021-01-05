@@ -5,4 +5,7 @@ export default {
   specificPokemon: '/specificPokemon/:id',
   specificPokemonLink: '/specificPokemon/',
   first20Pokemon: '/all/0',
+  moves:'/moves',
+  games:'/games',
+  about:'/about',
 };

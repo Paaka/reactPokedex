@@ -8,6 +8,9 @@ import AllPokemonView from './views/AllPokemonView';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import SpecificPokemonView from './views/SpecificPokemonView';
+import MovesView from './views/MovesView';
+import GamesView from './views/GamesView';
+import AboutView from './views/AboutView';
 
 class App extends React.Component {
   render() {
@@ -23,6 +26,15 @@ class App extends React.Component {
             </Route>
             <Route path={routes.specificPokemon}>
               <SpecificPokemonView></SpecificPokemonView>
+            </Route>
+            <Route path={routes.moves}>
+              <MovesView />
+            </Route>
+            <Route path={routes.games}>
+              <GamesView />
+            </Route>
+            <Route path={routes.about}>
+              <AboutView></AboutView>
             </Route>
           </Switch>
         </Router>

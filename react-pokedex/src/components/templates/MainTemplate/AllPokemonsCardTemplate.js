@@ -8,6 +8,7 @@ const CardWrapper = styled.div`
   width: 100%;
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 20px;
+  justify-items:center;
 `;
 
 const AllPokemonsCardTemplate = ({ pokemons, page, pageFn }) => {

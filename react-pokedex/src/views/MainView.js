@@ -46,17 +46,17 @@ const MainView = () => {
           >Pokedex</MainMenuCard>
           <MainMenuCard 
             cardColor={Colors.yellow} 
-            linkTo={routes.first20Pokemon}
+            linkTo={routes.moves}
             image={MoveImage}
           >Moves</MainMenuCard>
           <MainMenuCard 
             cardColor={Colors.green} 
-            linkTo={routes.first20Pokemon}
+            linkTo={routes.games}
             image={GamesImage}
           >Games</MainMenuCard>
           <MainMenuCard 
             cardColor={Colors.blue} 
-            linkTo={routes.first20Pokemon}
+            linkTo={routes.about}
             image={AboutImage}
           >About</MainMenuCard>
         </ItemWrapper>
