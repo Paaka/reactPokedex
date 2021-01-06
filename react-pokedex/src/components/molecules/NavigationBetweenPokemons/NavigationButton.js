@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   padding: 2px 15px;
-  background-color: orangered;
+  background-color: ${({isActive})=> isActive ? 'green' :'orangered'};
   border-radius: 15px;
 
   :hover {
@@ -19,13 +19,13 @@ const StyledP = styled.p`
   color: white;
 `;
 
-const NavigationButton = ({ children, onClickFn, linkPath }) => {
+const NavigationButton = ({ children, onClickFn, linkPath, isActive }) => {
   const onClickHandler = () => {
     onClickFn();
   };
 
   return (
-    <Wrapper>
+    <Wrapper isActive={isActive}>
       <Link style={{ textDecoration: 'none' }} onClick={onClickHandler} to={linkPath}>
         <StyledP>{children}</StyledP>
       </Link>
