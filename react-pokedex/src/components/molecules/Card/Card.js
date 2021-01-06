@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../../routes/routes';
 import { FormatPokedexId } from '../../../utilities/utilities';
+import TypeItem from '../TypeItem/TypeItem';
 
 const Wrapper = styled.div`
   width: 200px;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-self: center;
-  margin-top: 10px;
+  margin-top: 15px;
   opacity: ${({ isLoaded }) => (isLoaded ? 1 : 0)};
   transition: all 0.25s;
   align-items: flex-start;
@@ -43,6 +44,8 @@ const StyledPokemonName = styled.h3`
   color: black;
 `;
 
+
+
 const Card = ({ pokemon, id }) => {
   const [loaded, setIsLoaded] = useState(false);
 
@@ -57,7 +60,6 @@ const Card = ({ pokemon, id }) => {
       <Wrapper isLoaded={loaded}>
         <StyledImage src={pokemon.image} onLoad={onLoadFn} />
         <StyledIndex>{FormatPokedexId(id)}</StyledIndex>
-        {/* <PokemonTypes types={pokemon.types} id={id} /> */}
         <StyledPokemonName>{pokemon.name}</StyledPokemonName>
       </Wrapper>
     </Link>

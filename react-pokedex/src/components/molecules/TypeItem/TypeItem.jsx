@@ -6,7 +6,7 @@ import Paragraph from '../../atoms/Typography/Paragraph/Paragraph';
 const Wrapper = styled.div`
     display:flex;
     background-color:${({typeX})=> typeColors[typeX]};
-    width:140px;
+    width: ${({width})=> width ? width : '140px'};
     height:30px;
     justify-content:center;
     align-items:center;
@@ -14,8 +14,8 @@ const Wrapper = styled.div`
     margin-right:5px;
 `
 
-const TypeItem = ({type}) => (
-    <Wrapper typeX={type}>
+const TypeItem = ({type, width}) => (
+    <Wrapper typeX={type} width={width}>
         <Paragraph fontColor="white" fontWeight={300}>{type}</Paragraph>
     </Wrapper>);
 

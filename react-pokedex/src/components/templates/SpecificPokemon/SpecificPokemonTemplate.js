@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import routes from '../../../routes/routes';
 import H2 from '../../atoms/Typography/H2/H2';
 import Heading3 from '../../atoms/Typography/Heading3/Heading3';
+import LinkToBrowsing from '../../molecules/LinkToBrowsing/LinkToBrowsing';
 import PokemonAditionalInfo from '../../molecules/PokemonAditionalInfo/PokemonAditionalInfo';
 import TypeItem from '../../molecules/TypeItem/TypeItem';
 import EvolutionChain from '../../organisms/EvolutionChain/EvolutionChain';
@@ -43,6 +46,7 @@ const SpecficPokemonTemplate = ({ PokemonData, pokemonID, changeLoadingFn }) => 
       <Heading3 fontSize={28}>Evolutions :</Heading3>
       </HeadingWrapper>
       <EvolutionChain evolutionChain={PokemonData.evolutionChain} loadingFn={changeLoadingFn}/>
+      <LinkToBrowsing pokemonID={pokemonID}/>
     </div>
   );
 };

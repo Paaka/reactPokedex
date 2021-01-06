@@ -157,11 +157,13 @@ const SpecificPokemonView = () => {
       }
     }
 
-    if(x.data.chain.evolves_to[0].evolves_to.length > 1){
-      for(let i = 0;i < x.data.chain.evolves_to[0].evolves_to.length; i++){
-        const thirdEvolutions = await  getPokemonEvolutionInformation(x.data.chain.evolves_to[0].evolves_to[i].species);
-        if(thirdEvolutions !== undefined){
-          evolutionChain.push(thirdEvolutions);
+    if(x.data.chain.evolves_to.length > 0){
+      if(x.data.chain.evolves_to[0].evolves_to.length > 1){
+        for(let i = 0;i < x.data.chain.evolves_to[0].evolves_to.length; i++){
+          const thirdEvolutions = await  getPokemonEvolutionInformation(x.data.chain.evolves_to[0].evolves_to[i].species);
+          if(thirdEvolutions !== undefined){
+            evolutionChain.push(thirdEvolutions);
+          }
         }
       }
     }
