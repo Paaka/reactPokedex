@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import contestColors from '../../../constants/contestColors';
+import categoryColors from '../../../constants/categoryColors';
 import TypeColors from '../../../constants/typeColors';
 import Paragraph from '../../atoms/Typography/Paragraph/Paragraph';
 
@@ -7,16 +10,9 @@ const StyledGridContainer = styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+    background-color:${({bgColor}) => bgColor};
 `
 
-const StyledTypeContainer = styled(StyledGridContainer)`
-    background-color:${({type}) => TypeColors[type]};
-    color:white;
-`
-
-const StyledCategoryContainer = styled(StyledGridContainer)`
-
-`
 
 const MovesTableItem = ({moveData}) => (
     <>
@@ -26,14 +22,14 @@ const MovesTableItem = ({moveData}) => (
         <StyledGridContainer>
             <p>{moveData.name}</p>
         </StyledGridContainer>
-        <StyledTypeContainer type={moveData.type.name}>
+        <StyledGridContainer bgColor={TypeColors[moveData.type.name]}>
             <Paragraph fontColor="white">{moveData.type.name}</Paragraph>
-        </StyledTypeContainer>
-        <StyledGridContainer>
-            <p>{moveData.damage_class.name}</p>
         </StyledGridContainer>
-        <StyledGridContainer>
-            <p>{moveData.contest_type.name}</p>
+        <StyledGridContainer bgColor={categoryColors[moveData.damage_class.name]}>
+            <Paragraph fontColor="white">{moveData.damage_class.name}</Paragraph>
+        </StyledGridContainer>
+        <StyledGridContainer bgColor={contestColors[moveData.contest_type.name]}>
+            <Paragraph fontColor="white">{moveData.contest_type.name}</Paragraph>
         </StyledGridContainer>
         <StyledGridContainer>
             <p>{moveData.pp}</p>
