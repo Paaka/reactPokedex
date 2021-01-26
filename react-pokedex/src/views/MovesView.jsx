@@ -9,6 +9,7 @@ import Paragraph from '../components/atoms/Typography/Paragraph/Paragraph';
 import LoadMoreBtn from '../components/molecules/LoadMoreBtn/LoadMoreBtn';
 import LoadingSVG from '../assets/SVGS/loadingBlue.svg';
 import { RotateAnimation } from '../animations/animations';
+import typeColors from '../constants/typeColors';
 
 const Container = styled.div`
    display:flex;
@@ -16,6 +17,7 @@ const Container = styled.div`
    align-items:center;
    width:100%;
    justify-content:center;
+   position:relative;
 `
 
 const TableContainer = styled.div`
@@ -24,6 +26,7 @@ const TableContainer = styled.div`
     grid-template-columns: 5vw 20vw 10vw 10vw 10vw 5vw 5vw 10vw 5vw;
     grid-gap:2px;
 `;
+
 const GridCenterWrapper = styled.div`
     display:flex;
     justify-content:center;
@@ -31,10 +34,27 @@ const GridCenterWrapper = styled.div`
     padding:10px 0;
 `;  
 
-
 const LoadingImg = styled.img`
     margin:10px auto;
     animation: ${RotateAnimation} infinite linear 1s;
+`
+
+const FilterBtn = styled.div`
+    background-color:${typeColors.water};
+    padding:5px 50px;
+    margin:10px 0px;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.2s ease-in;
+
+    :hover{
+        transform:scale(1.1);
+    }
+
+    :active{
+        transform:scale(1.05);
+    }   
 `
 
 const MovesView = () => {
@@ -58,6 +78,7 @@ const MovesView = () => {
     }
 
 
+
     useEffect(()=>{
         async function fetchMoves(){
             // const ArrOfMoves = await get20Moves();
@@ -76,6 +97,7 @@ const MovesView = () => {
     return(
         <MainTemplate>{isLoaded ? (
         <Container>
+            <FilterBtn>Filter</FilterBtn>
             <TableContainer>
                 <GridCenterWrapper>
                     <Paragraph fontWeight={700}>#</Paragraph>

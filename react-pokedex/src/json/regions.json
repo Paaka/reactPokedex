@@ -1,0 +1,24 @@
+{
+   "regions": [
+        {
+            "name":"Kanto",
+            "description":"The Kanto region (Japanese: カントー地方 Kanto-chihō) is a region of the Pokémon world. It forms a joint landmass with the contiguous region of Johto, and (as revealed by the radio show Sinnoh Sound) are located south of the Sinnoh region. It was the first region to be introduced. It is the setting of the Generation I games, FireRed and LeafGreen, and Let's Go, Pikachu! and Let's Go, Eevee!; it is also accessible in Pokémon Gold, Silver, Crystal, HeartGold, and SoulSilver after the quest in Johto is completed.",
+            "regionImageURL":"https://cdn.bulbagarden.net/upload/2/25/LGPE_Kanto_Map.png",
+            "starterPokemons":[
+                {"name":"Bulbasar", "id":1},
+                {"name":"Charmander", "id":4},
+                {"name":"Squirtle", "id":7}
+            ]
+        },
+        {
+            "name":"Jotho",
+            "description":"The Johto region (Japanese: ジョウト地方 Johto-chihō) is a region of the Pokémon world. It is located west of Kanto, and as revealed by the radio show Sinnoh Sound, is located south of Sinnoh. It is the setting of Pokémon Gold, Silver, Crystal, HeartGold, and SoulSilver. Johto and Kanto are part of a large landmass, with everything west of Indigo Plateau falling in the Johto region. It was the second core series region to be introduced.",
+            "regionImageURL":"https://cdn.bulbagarden.net/upload/6/64/JohtoMap.png",
+            "starterPokemons":[
+                {"name":"Chikorita", "id":152},
+                {"name":"Cyndaquil", "id":155},
+                {"name":"Totodile", "id":158}
+            ]
+        }
+   ]
+}
